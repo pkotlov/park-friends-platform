@@ -1,0 +1,31 @@
+<h1>Listing facebook_registrations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Facebook</th>
+      <th>Facebookid</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @facebook_registrations.each do |facebook_registration| %>
+      <tr>
+        <td><%= facebook_registration.facebook %></td>
+        <td><%= facebook_registration.facebookId %></td>
+        <td><%= facebook_registration.name %></td>
+        <td><%= facebook_registration.email %></td>
+        <td><%= link_to 'Show', facebook_registration %></td>
+        <td><%= link_to 'Edit', edit_facebook_registration_path(facebook_registration) %></td>
+        <td><%= link_to 'Destroy', facebook_registration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Facebook registration', new_facebook_registration_path %>

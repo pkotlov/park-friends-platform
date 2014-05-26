@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :facebook_registrations
+
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.

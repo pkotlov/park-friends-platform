@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Facebook:</strong>
+  <%= @facebook_registration.facebook %>
+</p>
+
+<p>
+  <strong>Facebookid:</strong>
+  <%= @facebook_registration.facebookId %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @facebook_registration.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @facebook_registration.email %>
+</p>
+
+<%= link_to 'Edit', edit_facebook_registration_path(@facebook_registration) %> |
+<%= link_to 'Back', facebook_registrations_path %>
