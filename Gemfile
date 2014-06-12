@@ -6,6 +6,8 @@ gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
 group :development do
   gem 'sqlite3'
+  gem 'ruby-debug-ide'
+  gem 'ruby-debug-base19x'
 end
 
 group :production do
