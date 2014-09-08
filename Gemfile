@@ -9,12 +9,7 @@ group :development, :test do
   gem 'rspec-rails', '2.13.1'
   gem 'guard-rspec', '2.5.0'
 end
-# Use sqlite3 as the database for Active Record
-# group :development do
-#  gem 'debugger'
-#  gem 'ruby-debug-ide'
-#  gem 'ruby-debug-base19x', '~> 0.11.29'
-# end
+
 group :production  do
   gem 'pg', '0.15.1'
   #gem 'activerecord-postgis-adapter'
@@ -50,6 +45,12 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Use debugger
 gem 'debugger', group: [:development, :test]
+# Use sqlite3 as the database for Active Record
+# group :development do
+#  gem 'debugger'
+#  gem 'ruby-debug-ide'
+#  gem 'ruby-debug-base19x', '~> 0.11.29'
+# end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
