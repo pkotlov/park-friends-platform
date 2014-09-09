@@ -1,0 +1,35 @@
+<h1>Listing pspaces</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Address</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Availability</th>
+      <th>Post on facebook</th>
+      <th>Parked</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pspaces.each do |pspace| %>
+      <tr>
+        <td><%= pspace.address %></td>
+        <td><%= pspace.latitude %></td>
+        <td><%= pspace.longitude %></td>
+        <td><%= pspace.availability %></td>
+        <td><%= pspace.post_on_facebook %></td>
+        <td><%= pspace.parked %></td>
+        <td><%= link_to 'Show', pspace %></td>
+        <td><%= link_to 'Edit', edit_pspace_path(pspace) %></td>
+        <td><%= link_to 'Destroy', pspace, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pspace', new_pspace_path %>

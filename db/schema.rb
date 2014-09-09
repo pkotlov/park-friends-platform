@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908192514) do
+ActiveRecord::Schema.define(version: 20140909161923) do
+
+  create_table "pspaces", force: true do |t|
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "availability"
+    t.boolean  "post_on_facebook"
+    t.boolean  "parked"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

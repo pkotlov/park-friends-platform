@@ -1,0 +1,41 @@
+<%= form_for(@pspace) do |f| %>
+  <% if @pspace.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pspace.errors.count, "error") %> prohibited this pspace from being saved:</h2>
+
+      <ul>
+      <% @pspace.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :latitude %><br>
+    <%= f.text_field :latitude %>
+  </div>
+  <div class="field">
+    <%= f.label :longitude %><br>
+    <%= f.text_field :longitude %>
+  </div>
+  <div class="field">
+    <%= f.label :availability %><br>
+    <%= f.text_field :availability %>
+  </div>
+  <div class="field">
+    <%= f.label :post_on_facebook %><br>
+    <%= f.check_box :post_on_facebook %>
+  </div>
+  <div class="field">
+    <%= f.label :parked %><br>
+    <%= f.check_box :parked %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

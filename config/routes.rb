@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :pspaces
+
   resources :users
   
   root 'welcome#index'

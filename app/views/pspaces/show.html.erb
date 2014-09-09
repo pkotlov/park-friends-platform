@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @pspace.address %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @pspace.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @pspace.longitude %>
+</p>
+
+<p>
+  <strong>Availability:</strong>
+  <%= @pspace.availability %>
+</p>
+
+<p>
+  <strong>Post on facebook:</strong>
+  <%= @pspace.post_on_facebook %>
+</p>
+
+<p>
+  <strong>Parked:</strong>
+  <%= @pspace.parked %>
+</p>
+
+<%= link_to 'Edit', edit_pspace_path(@pspace) %> |
+<%= link_to 'Back', pspaces_path %>
