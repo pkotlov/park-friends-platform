@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   
   
   def facebook_id_to_password
-    if blank self.facebook_id #== "" or self.facebook_id == nil
+    if self.facebook_id.blank? #== "" or self.facebook_id == nil
       
     else
       self.facebook_id = "ABASDFGGH"

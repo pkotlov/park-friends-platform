@@ -14,4 +14,11 @@ describe User do
 
   it { should be_valid }
   
+  describe "when facebookid is present" do
+    before{@user.password = ""}
+    it "set passwort" do
+      @user.facebook_id_to_password()
+      expect(@user.password).to eq("ABASDFGGH")
+    end
+  end
 end

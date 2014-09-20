@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140909161923) do
+ActiveRecord::Schema.define(version: 20140909164511) do
 
   create_table "pspaces", force: true do |t|
     t.string   "address"
