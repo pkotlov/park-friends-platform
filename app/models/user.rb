@@ -10,11 +10,22 @@ class User < ActiveRecord::Base
   
   
   def facebook_id_to_password
-    if self.facebook_id.blank? #== "" or self.facebook_id == nil
-      
-    else
-      self.facebook_id = "ABASDFGGH"
+    if self.facebook_id.blank? == false && self.password.blank? #== "" or self.facebook_id == nil
+      self.create_password
       #value = ""; 8.times{value  << (65 + rand(25)).chr}
     end
+  end
+  
+  
+  def User.new_remember_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def User.encrypt(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def create_password
+    self.password = User.encrypt(User.new_remember_token)
   end
 end

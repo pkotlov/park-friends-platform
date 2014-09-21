@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @user.facebook_id_to_password()
     
     respond_to do |format|
       if @user.save
