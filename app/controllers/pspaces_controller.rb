@@ -5,15 +5,15 @@ class PspacesController < ApplicationController
   # GET /pspaces
   # GET /pspaces.json
   def index
-    latitude = Integer(params[:latitude])
-    longitude = Integer(params[:longitude])
-    radius = Integer(params[:radius])
+    latitude = Float(params[:latitude])
+    longitude = Float(params[:longitude])
+    radius = Float(params[:radius])
     if(latitude != nil && longitude != nil && radius != nil)
       latitude_min = latitude - radius
       latitude_max = latitude + radius
       longitude_min = longitude - radius
       longitude_max = longitude + radius
-      @pspaces = Pspace.where("latitude > ?", latitude_min)
+      @pspaces = Pspace.where("latitude > ?", latitude_min).where("latitude < ?", latitude_max).where("longitude > ?", longitude_min).where("longitude < ?", longitude_max)
     else
       @pspaces = Pspace.all
     end
