@@ -5,7 +5,20 @@ class PspacesController < ApplicationController
   # GET /pspaces
   # GET /pspaces.json
   def index
-    @pspaces = Pspace.all
+    latitude = Integer(params[:latitude])
+    longitude = Integer(params[:longitude])
+    radius = Integer(params[:radius])
+    if(latitude != nil && longitude != nil && radius != nil)
+      latitude_min = latitude - radius
+      latitude_max = latitude + radius
+      longitude_min = longitude - radius
+      longitude_max = longitude + radius
+      @pspaces = Pspace.where("latitude > ?", latitude_min)
+    else
+      @pspaces = Pspace.all
+    end
+    rescue
+      @pspaces = Pspace.all
   end
 
   # GET /pspaces/1
