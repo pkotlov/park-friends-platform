@@ -1,21 +1,12 @@
 class PspacesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_pspace, only: [:show, :edit, :update, :destroy]
-
   # GET /pspaces
   # GET /pspaces.json
   def index
-    latitude_min = Float(params[:latitude_min])
-    longitude_min = Float(params[:longitude_min])
-    latitude_max = Float(params[:latitude_max])
-    longitude_max = Float(params[:longitude_max])
-    if(latitude_min != nil && longitude_min != nil && latitude_max != nil && longitude_max != nil)
-      @pspaces = Pspace.where("latitude > ?", latitude_min).where("latitude < ?", latitude_max).where("longitude > ?", longitude_min).where("longitude < ?", longitude_max)
-    else
+    if(handleBracketRequest? == false)
       @pspaces = Pspace.all
     end
-    rescue
-      @pspaces = Pspace.all
   end
 
   # GET /pspaces/1
@@ -73,13 +64,31 @@ class PspacesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_pspace
-      @pspace = Pspace.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def pspace_params
-      params.require(:pspace).permit(:address, :latitude, :longitude, :availability, :post_on_facebook, :parked)
+  # Use callbacks to share common setup or constraints between actions.
+  def set_pspace
+    @pspace = Pspace.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def pspace_params
+    params.require(:pspace).permit(:address, :latitude, :longitude, :availability, :post_on_facebook, :parked)
+  end
+
+  def handleBracketRequest?
+    if(params[:latitude_min] != nil && params[:longitude_min] != nil && params[:latitude_max] != nil && params[:longitude_max] != nil)
+      latitude_min = Float(params[:latitude_min])
+      longitude_min = Float(params[:longitude_min])
+      latitude_max = Float(params[:latitude_max])
+      longitude_max = Float(params[:longitude_max])
+      @pspaces = Pspace.where("latitude > ?", Float(params[:latitude_min])).where("latitude < ?", Float(params[:latitude_max])).where("longitude > ?", Float(params[:longitude_min])).where("longitude < ?", Float(params[:longitude_max]))
+    return true
     end
+    return false
+
+    rescue Exception => exception
+      respond_to do |format|
+        format.json { render json: {error: "Error while parsing parameters.", status: 400}, status: :unprocessable_entity }
+      end
+  end
 end
