@@ -8,7 +8,18 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX }, 
                     uniqueness: { case_sensitive: false }
   
-  
+  validates_with FacebookValidator
+
+
+  class FacebookValidator < ActiveModel::Validator
+    def validate(record)
+      if self.facebook_id.blank? && self.password.blank?
+        record.errors[:base] << "Either facabook_id or password are not suposed to be blank."
+      end
+    end
+  end
+
+
   def facebook_id_to_password
     if self.facebook_id.blank? == false && self.password.blank? #== "" or self.facebook_id == nil
       self.create_password

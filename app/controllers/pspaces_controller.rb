@@ -5,13 +5,16 @@ class PspacesController < ApplicationController
   # GET /pspaces.json
   def index
     if(handleBracketRequest? == false)
-      @pspaces = Pspace.all
+      @pspaces = Pspace.where(
+        "created_at > ?", DateTime.now - 30.minutes)
+      Rails.logger.info "Remove me"
     end
   end
 
   # GET /pspaces/1
   # GET /pspaces/1.json
   def show
+    @pspace.to_json
   end
 
   # GET /pspaces/new
@@ -75,14 +78,14 @@ class PspacesController < ApplicationController
     params.require(:pspace).permit(:address, :latitude, :longitude, :availability, :post_on_facebook, :parked)
   end
 
+  # Handle the request for all pspaces in one bracket
   def handleBracketRequest?
     if(params[:latitude_min] != nil && params[:longitude_min] != nil && params[:latitude_max] != nil && params[:longitude_max] != nil)
-      latitude_min = Float(params[:latitude_min])
-      longitude_min = Float(params[:longitude_min])
-      latitude_max = Float(params[:latitude_max])
-      longitude_max = Float(params[:longitude_max])
-      @pspaces = Pspace.where("latitude > ?", Float(params[:latitude_min])).where("latitude < ?", Float(params[:latitude_max])).where("longitude > ?", Float(params[:longitude_min])).where("longitude < ?", Float(params[:longitude_max]))
-    return true
+      @pspaces = Pspace.where(
+      :latitude => Float(params[:latitude_min])..Float(params[:latitude_max])).where(
+      :longitude => Float(params[:longitude_min])..Float(params[:longitude_max])).where(
+       "created_at > ?", DateTime.now - 30.minutes)
+      return true
     end
     return false
 
