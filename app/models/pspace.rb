@@ -3,8 +3,8 @@ class Pspace < ActiveRecord::Base
     validates :latitude, numericality: true
     validates :longitude, numericality: true
 
-    validates :availability, inclusion: { in: %w(NO FEW MANY),
-    message: "%{value} is not a valid availablity. [NO FEW MANY]" }
+    validates :availability, inclusion: { in: %w(NO FEW MANY), allow_nil: true,
+    message: "%{value} is not a valid availablity. following values are allowed [NO FEW MANY]" }
     
     def actuality
       if(self.created_at > DateTime.now - 5.minutes)
