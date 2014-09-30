@@ -1,3 +1,5 @@
+require 'validators/facebook_validator'
+
 class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   
@@ -9,15 +11,6 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   
   validates_with FacebookValidator
-
-
-  class FacebookValidator < ActiveModel::Validator
-    def validate(record)
-      if self.facebook_id.blank? && self.password.blank?
-        record.errors[:base] << "Either facabook_id or password are not suposed to be blank."
-      end
-    end
-  end
 
 
   def facebook_id_to_password
