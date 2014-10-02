@@ -81,17 +81,18 @@ class PspacesController < ApplicationController
   # Handle the request for all pspaces in one bracket
   def handleBracketRequest?
     if(params[:latitude_min] != nil && params[:longitude_min] != nil && params[:latitude_max] != nil && params[:longitude_max] != nil)
+      
       @pspaces = Pspace.where(
       :latitude => Float(params[:latitude_min])..Float(params[:latitude_max])).where(
-      :longitude => Float(params[:longitude_min])..Float(params[:longitude_max])).where(
-       "created_at > ?", DateTime.now - 30.minutes)
+      :longitude => Float(params[:longitude_min])..Float(params[:longitude_max])).get_only_current_pspaces(
+       params[:test]).where.not(availability: 'NO')
       return true
     end
     return false
 
     rescue Exception => exception
       respond_to do |format|
-        format.json { render json: {error: "Error while parsing parameters.", status: 400}, status: :unprocessable_entity }
+        format.json { render json: {error: "Error while parsing parameters.", status: 422}, status: :unprocessable_entity }
       end
   end
 end
