@@ -1,0 +1,25 @@
+{
+  "id": {
+    "id": "1572137149664613"
+  },
+  "is_scraped": {
+    "is_scraped": "false"
+  },
+  "created_time": {
+    "created_time": "2014-11-29T14:30:39+0000"
+  },
+  "og": {
+    "type": "parkfriends:parkplace",
+    "title": "wedwedwed",
+    "image": {
+      "url": "https://s-static.ak.fbcdn.net/images/devsite/attachment_blank.png"
+    },
+    "updated_time": "2014-11-29T14:30:39+0000"
+  },
+  "place": {
+    "location": {
+      "latitude": 49,
+      "longitude": 9
+    }
+  }
+}

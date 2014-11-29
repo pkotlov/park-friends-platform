@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   end
   
   
-  def User.new_remember_token
+  def User.new_random_token
     SecureRandom.urlsafe_base64
   end
 
@@ -30,6 +30,6 @@ class User < ActiveRecord::Base
   end
 
   def create_password
-    self.password = User.encrypt(User.new_remember_token)
+    self.password = User.encrypt(User.new_random_token)
   end
 end

@@ -18,7 +18,7 @@ describe User do
     before{@user.password = ""}
     it "set passwort" do
       @user.facebook_id_to_password()
-      expect(@user.password).to eq("ABASDFGGH")
+      @user.password.should_not eq("")
     end
   end
 end
